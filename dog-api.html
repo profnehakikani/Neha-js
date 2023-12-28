@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 5 -->
+    <div id="card">
+        <img src="" alt="" srcset="">
+    </div>
+    <script>
+        // 1
+        fetch ("https://dog.ceo/api/breeds/image/random").then((res)=>{
+            // 2
+            res.json().then((dog)=>{
+                // 3
+                console.log(dog);
+                // 4  
+                let img = dog.message;
+                // 6
+                let card = document.getElementById("card");
+                // 7
+                let image = document.createElement("img");
+                // 8
+                image.src=img;
+                // 9
+                card.appendChild(image);
+
+            });
+        });
+    </script>
+</body>
+</html>

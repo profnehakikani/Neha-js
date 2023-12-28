@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>poroduct list</h1>
+
+        <input type="text" name="fname" id="fname">
+        <input type="text" name="lname" id="lname">
+        <input type="number" name="age" id="age">
+        <button onclick="save()" type="submit">Submit</button>
+
+        <br><br>
+        <!-- update  -->
+        <input type="text" name="firstname" id="firstname">
+        <input type="text" name="lastname" id="lastname">
+        <input type="number" name="personage" id="personage">
+        <input type="hidden" name="index" id="index">
+        <button onclick="finalUpdate()">update</button>
+        <!-- <button>cancel</button> -->
+
+
+    <br><br><br><br>
+    <table border="1" cellspacing="0" cellpadding="20" width="50%">
+        <thead bgcolor="pink">
+            <th>firstname</th>
+            <th>lastname</th>
+            <th>age</th>
+        </thead>
+        <tbody id="table-body">
+            <tr></tr>
+        </tbody>
+    </table>
+
+
+
+    <script>
+        const arr = JSON.parse(localStorage.getItem("details")) || [];
+        const tbody = document.getElementById("table-body");
+
+        // localStorage.clear();
+         const save = () => {
+            const fname=document.getElementById("fname").value;
+            const lname=document.getElementById("lname").value;
+            const age=document.getElementById("age").value;
+
+            const data ={
+                fname,
+                lname,
+                age,
+
+            };
+            // console.log(data);
+            arr.push(data);
+
+
+            localStorage.setItem("details",JSON.stringify(arr));
+            loadata(data);
+         };
+
+         arr.forEach((e,ind) => loadata(e,ind));
+
+         function loadata(e,ind){
+            // console.log(e, "data");
+            // console.log(ind, "data");
+            const tr =document.createElement("tr");
+            tr.innerHTML=`<td>${e.fname}</td>
+            <td>${e.lname}</td><td>${e.age}</td>
+            <button onClick="removedata(${ind})">remove</button>
+            <button onClick="viewdata(${ind})">view</button>`;
+            // uper ne line (remove data)
+            tbody.appendChild(tr);
+
+         }
+
+
+        //  remove data
+
+        function removedata (ind){
+            // console.log(ind);
+            arr.splice(ind, 1);
+            // console.log(arr);
+            localStorage.setItem("details",JSON.stringify(arr));
+            location.reload();
+        }
+
+        // viewdata
+        function viewdata(ind){
+            const data = arr [ind];
+            // console.log(data);
+            document.getElementById("firstname").value= data.fname;
+            document.getElementById("lastname").value= data.lname;
+            document.getElementById("personage").value= data.age;
+
+            document.getElementById("index").value=ind;
+        }
+
+        function finalUpdate(){
+            const fname = document.getElementById("firstname").value;
+            const lname = document.getElementById("lastname").value;
+            const age = document.getElementById("personage").value;
+
+            const index = parseInt(document.getElementById("index").value);
+
+            const data ={
+             fname,
+             lname,
+             age,
+            };
+            console.log(data,index);
+            arr.splice(index,1,data);
+            console.log(arr);
+
+            localStorage.setItem("details",JSON.stringify(arr));
+            location.reload();
+        };
+
+    </script>
+
+</body>
+
+</html>

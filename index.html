@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="ring">
+        <i style="--clr:#00ff0a;"></i>
+        <i style="--clr:#ff0057;"></i>
+        <i style="--clr:#fffd44;"></i>
+        <div class="login">
+            <h2>Login</h2>
+            <div class="inputBx">
+                <input type="text" placeholder="Username" name="username" id="username">
+            </div>
+            <div class="inputBx">
+                <input type="password" placeholder="Password" name="password" id="password">
+            </div>
+            <button type="submit" onclick="login()">
+                Sign in
+            </button>
+
+            <div class="links">
+                <a href="#">Forget Password</a>
+                <a href="#">Signup</a>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        const login = () => {
+            const user = document.getElementById("username").value;
+            const pass = document.getElementById("password").value;
+
+            if (user === "user" && pass === "neha") {
+                window.location.href = "user/user.html";
+
+            } else if (user === "admin" && pass === "neha") {
+                window.location.href = "admin/admin.html";
+            } else {
+                document.getElementById("err").innerHTML = "error";
+
+            }
+        };
+    </script>
+
+</body>
+
+</html>
